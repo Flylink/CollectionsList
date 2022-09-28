@@ -4,17 +4,23 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static void listCheck(String headline, List<String> shoppingList) {
+        System.out.println(headline);
+        for (int i = 0; i < shoppingList.size(); i++) {
+            System.out.println(i + 1 + ". " + shoppingList.get(i));
+        }
+    }
+
     public static void main(String[] args) {
         int operation = 0;
         List<String> shoppingList = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Выберите операцию и введите её номер, для завершения введите end:" +
                     " \n1. Добавить товар в список покупок" +
                     " \n2. Показать список покупок" +
                     " \n3. Удалить товар из списка покупок" +
                     " \n4. Поиск в списке покупок");
-
-            Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             if (input.equals("end")) {
                 break;
@@ -27,25 +33,18 @@ public class Main {
             switch (operation) {
                 case 1:
                     System.out.println("\n" + "Какую покупку хотите добавить?");
-                    Scanner scanner1 = new Scanner(System.in);
-                    input = scanner1.nextLine();
+
+                    input = scanner.nextLine();
                     shoppingList.add(input);
                     System.out.println("Итого в списке покупок: " + shoppingList.size());
                     break;
                 case 2:
-                    System.out.println("\n" + "Список покупок:");
-                    for (int i = 0; i < shoppingList.size(); i++) {
-                        System.out.println((i + 1) + ". " + shoppingList.get(i));
-                    }
+                    listCheck("\nСписок покупок:", shoppingList);
                     break;
                 case 3:
-                    System.out.println("\n" + "Список покупок:");
-                    for (int i = 0; i < shoppingList.size(); i++) {
-                        System.out.println((i + 1) + ". " + shoppingList.get(i));
-                    }
+                    listCheck("\nСписок покупок:", shoppingList);
                     System.out.println("Какой товар хотите удалить? Введите номер или название");
-                    Scanner scanner2 = new Scanner(System.in);
-                    String removeInput = scanner2.nextLine();
+                    String removeInput = scanner.nextLine();
                     try {
                         int removeNumber = Integer.parseInt(removeInput) - 1;
                         System.out.println("Покупка \"" + shoppingList.get(removeNumber) + "\" удалена, список покупок:");
@@ -67,8 +66,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Введите текст для поиска:");
-                    Scanner scanner3 = new Scanner(System.in);
-                    String search = scanner3.nextLine().toLowerCase();
+                    String search = scanner.nextLine().toLowerCase();
                     System.out.println("Найдено:");
                     boolean yes = false;
                     for (int i = 0; i < shoppingList.size(); i++) {
